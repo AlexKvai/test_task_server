@@ -1,10 +1,8 @@
 import { Router } from 'express'
-
+import { createCategory } from '../controllers/CategoryController'
 const router = Router()
 
 // Пример маршрута для получения категорий
-router.get('/', (req, res) => {
-	res.send('Get all categories')
-})
+router.post('/create', createCategory)
 
 export default router
