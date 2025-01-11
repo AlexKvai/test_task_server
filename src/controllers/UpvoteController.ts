@@ -47,7 +47,7 @@ const createUpvote = async (req: any, res: Response) => {
 			where: { id: feedbackId },
 		})
 
-		res.status(201).json(updatedFeedback)
+		res.status(201).json({ isVoted: true })
 	} catch (error) {
 		console.error(error)
 		res.status(500).json({ message: 'Internal server error', error })
