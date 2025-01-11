@@ -52,7 +52,7 @@ model Status {
 
 model Upvote {
   id         Int      @id @default(autoincrement())
-  feedback   Feedback @relation(fields: [feedbackId], references: [id])
+  feedback   Feedback @relation(fields: [feedbackId], references: [id], onDelete: Cascade) // Каскадное удаление
   feedbackId Int
   user       User     @relation(fields: [userId], references: [id])
   userId     Int
