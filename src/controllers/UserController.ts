@@ -1,15 +1,30 @@
 import bcrypt from 'bcryptjs'
 import { Request, Response } from 'express'
 import jwt from 'jsonwebtoken'
+//@ts-ignore
+import validator from 'validator'
 import prisma from '../prismaClient'
 
 const registerUser = async (req: Request, res: Response) => {
 	try {
 		const { email, password, avatar } = req.body
 
+		// Проверка валидности email
+		if (!validator.isEmail(email)) {
+			return res.status(400).json({ message: 'Invalid email format' })
+		}
+
+		// Проверка длины пароля
+		if (password.length < 3) {
+			return res
+				.status(400)
+				.json({ message: 'Password must be at least 3 characters long' })
+		}
+
 		const existingUser = await prisma.user.findUnique({ where: { email } })
-		if (existingUser)
+		if (existingUser) {
 			return res.status(400).json({ message: 'User already exists' })
+		}
 
 		const hashedPassword = await bcrypt.hash(password, 10)
 		const user = await prisma.user.create({
