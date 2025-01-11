@@ -97,6 +97,7 @@ const deleteFeedback = async (req: Request, res: Response) => {
 
 		await prisma.feedback.delete({ where: { id: Number(id) } })
 
+		res.json({ isDeleted: true })
 		res.status(204).send()
 	} catch (error) {
 		res.status(500).json({ message: 'Internal server error', error })
