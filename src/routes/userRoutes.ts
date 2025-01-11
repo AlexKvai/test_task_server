@@ -4,6 +4,7 @@ import {
 	loginUser,
 	registerUser,
 } from '../controllers/UserController'
+import authenticate from '../middlewares/authenticate' // Подключаем middleware аутентификации
 
 const router = express.Router()
 
@@ -14,6 +15,6 @@ router.post('/register', registerUser)
 router.post('/login', loginUser)
 
 // Get User Profile Route
-router.get('/profile', getUserProfile)
+router.get('/profile', authenticate, getUserProfile)
 
 export default router
