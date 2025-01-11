@@ -7,7 +7,6 @@ const createFeedback = async (req: any, res: Response) => {
 		const { title, description, categoryId, statusId } = req.body
 		const userId = req.user.id // Получение ID из JWT токена
 
-		console.log(userId)
 		// Создание фидбека и привязка к автору через relation с моделью User
 		const feedback = await prisma.feedback.create({
 			data: {
