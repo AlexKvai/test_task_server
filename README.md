@@ -230,7 +230,7 @@ npm run dev
 
   ### Получение профиля
 
-- **URL:** `/profile/`
+- **URL:** `/users/profile`
 - **Method:** `GET`
 - **NeedAuth:** `True`
 - **Description:** Получение профиля
