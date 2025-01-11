@@ -132,7 +132,7 @@ npm run dev
 - **Description:** Получение статуса по id .
 - **Request Params:**
   ```json
-   id (number): ID категории.
+   id (number): ID статуса.
   ```
 - **Response:**
 
