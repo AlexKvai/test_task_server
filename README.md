@@ -25,7 +25,6 @@ npm i
 
 ```bash
 npx prisma migrate dev --name add_cascade_delete
-npx prisma generate
 ```
 
 # Заполните базу данных с помощью команды
