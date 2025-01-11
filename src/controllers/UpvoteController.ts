@@ -6,7 +6,6 @@ const createUpvote = async (req: any, res: Response) => {
 		const feedbackId = parseInt(req.params.feedbackId)
 		const userId = req.user.id // Получение ID из JWT токена
 
-		console.log(feedbackId)
 		// Проверяем существование фидбека по ID
 		const feedback = await prisma.feedback.findUnique({
 			where: { id: feedbackId },
@@ -27,16 +26,30 @@ const createUpvote = async (req: any, res: Response) => {
 				.json({ message: 'You have already upvoted this feedback' })
 		}
 
-		// Создание upvote
-		const upvote = await prisma.upvote.create({
-			data: {
-				feedback: { connect: { id: feedbackId } },
-				user: { connect: { id: userId } },
-			},
+		// Создание upvote и обновление votesCount
+		await prisma.$transaction([
+			// Создание upvote
+			prisma.upvote.create({
+				data: {
+					feedback: { connect: { id: feedbackId } },
+					user: { connect: { id: userId } },
+				},
+			}),
+			// Увеличение votesCount
+			prisma.feedback.update({
+				where: { id: feedbackId },
+				data: { votesCount: { increment: 1 } }, // Инкремент votesCount
+			}),
+		])
+
+		// Получение обновленного feedback с актуальным votesCount
+		const updatedFeedback = await prisma.feedback.findUnique({
+			where: { id: feedbackId },
 		})
 
-		res.status(201).json(upvote)
+		res.status(201).json(updatedFeedback)
 	} catch (error) {
+		console.error(error)
 		res.status(500).json({ message: 'Internal server error', error })
 	}
 }
