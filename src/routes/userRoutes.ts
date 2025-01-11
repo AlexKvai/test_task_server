@@ -1,10 +1,19 @@
-import { Router } from 'express'
+import express from 'express'
+import {
+	getUserProfile,
+	loginUser,
+	registerUser,
+} from '../controllers/UserController'
 
-const router = Router()
+const router = express.Router()
 
-// Пример маршрута для регистрации пользователя
-router.post('/register', (req, res) => {
-	res.send('Register a new user')
-})
+// Register User Route
+router.post('/register', registerUser)
+
+// Login User Route
+router.post('/login', loginUser)
+
+// Get User Profile Route
+router.get('/profile', getUserProfile)
 
 export default router
