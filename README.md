@@ -75,7 +75,7 @@ npm run dev
 - **Description:** Получение категории по id .
 - **Request Params:**
   ```json
-   id (number): ID категории.
+  "id (number): ID категории."
   ```
 - **Response:**
 
@@ -132,7 +132,7 @@ npm run dev
 - **Description:** Получение статуса по id .
 - **Request Params:**
   ```json
-   id (number): ID категории.
+  "id (number): ID категории."
   ```
 - **Response:**
 
@@ -335,19 +335,19 @@ npm run dev
 - **Description:** Получение всех предложений
 - **Response Params:**
   ```json
-  category - id категории (необязательный)
+  "category - id категории (необязательный)
   status - id статуса (необязательный)
   sort - поля по которым необходимо сортировать через запятую, если несколько (createdAt,votesCount - пример) (необязательный)
   sortType - asc или desc (необязательный)
   page - номер страницы  (необязательный - по умолчанию 1)
-  limit - количество элементов на странице  (необязательный - по умолчанию 10)
+  limit - количество элементов на странице  (необязательный - по умолчанию 10)"
   ```
 - **Response:**
 
   ```json
   [
   	{
-  		"id": number,
+  		"id": "number",
   		"title": "string",
   		"description": "string",
   		"category": {
