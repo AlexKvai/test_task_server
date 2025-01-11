@@ -16,7 +16,8 @@ const registerUser = async (req: Request, res: Response) => {
 			data: { email, password: hashedPassword, avatar },
 		})
 
-		res.status(201).json(user)
+		const { password: pass, ...rest } = user
+		res.status(201).json(rest)
 	} catch (error) {
 		res.status(500).json({ message: 'Internal server error', error })
 	}
