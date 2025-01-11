@@ -5,10 +5,18 @@ import prisma from '../prismaClient'
 const createFeedback = async (req: any, res: Response) => {
 	try {
 		const { title, description, categoryId, statusId } = req.body
-		const userId = req.user.id
+		const userId = req.user.id // Получение ID из JWT токена
 
+		console.log(userId)
+		// Создание фидбека и привязка к автору через relation с моделью User
 		const feedback = await prisma.feedback.create({
-			data: { title, description, categoryId, statusId, authorId: userId },
+			data: {
+				title,
+				description,
+				categoryId,
+				statusId,
+				authorId: userId,
+			},
 		})
 
 		res.status(201).json(feedback)
