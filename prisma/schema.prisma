@@ -32,7 +32,8 @@ model Feedback {
   statusId    Int
   author      User     @relation(fields: [authorId], references: [id])
   authorId    Int
-  upvotes     Upvote[]
+  upvotes     Upvote[] // One-to-Many отношение
+  votesCount  Int      @default(0) // Добавляем поле для подсчёта голосов
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
